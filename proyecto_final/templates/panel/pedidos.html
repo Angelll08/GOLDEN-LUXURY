@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block titulo %}Pedidos (panel){% endblock %}
+{% block contenido %}
+<section>
+  <h1 class="titulo-seccion">Pedidos</h1>
+  {% include 'panel/_menu.html' %}
+  <div class="tabla-scroll">
+  <table>
+    <tr><th>#</th><th>Cliente</th><th>Productos</th><th>Total</th><th>Fecha</th><th>Estado</th></tr>
+    {% for p in pedidos %}
+    <tr>
+      <td>{{ p.pk }}</td>
+      <td>{{ p.usuario.username }}<br><small>{{ p.direccion }}</small>
+        {% if p.referencia_pago %}<br><small>Pago: {{ p.tarjeta_marca }} ···· {{ p.tarjeta_ultimos4 }} · {{ p.referencia_pago }}</small>{% endif %}</td>
+      <td>{% for i in p.items.all %}{{ i.variante.producto.nombre }} ({{ i.variante.talla }}) ×{{ i.cantidad }}
+        {% if i.personalizado %}<br><strong>BORDAR:</strong> {% if i.dorsal is not None %}dorsal {{ i.dorsal }}{% endif %}{% if i.dorsal is not None and i.nombre_bordado %} · {% endif %}{% if i.nombre_bordado %}nombre «{{ i.nombre_bordado }}»{% endif %}{% endif %}<br>{% endfor %}</td>
+      <td>${{ p.total|floatformat:2 }}</td>
+      <td>{{ p.creado|date:"d/m/Y H:i" }}</td>
+      <td>
+        <form method="post" style="display:flex; gap:6px">
+          {% csrf_token %}
+          <input type="hidden" name="pedido" value="{{ p.pk }}">
+          <select name="estado">
+            {% for valor, nombre in estados %}<option value="{{ valor }}" {% if p.estado == valor %}selected{% endif %}>{{ nombre }}</option>{% endfor %}
+          </select>
+          <button class="btn btn-chico" type="submit">Guardar</button>
+        </form>
+      </td>
+    </tr>
+    {% empty %}<tr><td colspan="6">Sin pedidos todavía.</td></tr>{% endfor %}
+  </table>
+  </div>
+</section>
+{% endblock %}

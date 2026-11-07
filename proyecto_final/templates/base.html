@@ -1,0 +1,93 @@
+{% load static %}<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Golden Luxury{% endblock %} · Golden Luxury</title>
+  <link rel="icon" href="{% static 'img/logo.jpg' %}">
+  <link rel="stylesheet" href="{% static 'css/golden.css' %}">
+  {% block head %}{% endblock %}
+</head>
+<body data-evento-url="{% url 'evento' %}" data-auth="{% if user.is_authenticated %}1{% else %}0{% endif %}">
+  <header class="navbar">
+    <div class="contenedor">
+      <a class="marca" href="{% url 'inicio' %}" data-libre>
+        <img src="{% static 'img/logo.jpg' %}" alt="Golden Luxury"> GOLDEN LUXURY
+      </a>
+      <form class="buscador" action="{% url 'catalogo' %}" method="get">
+        <input type="text" name="q" placeholder="Buscar jerseys, tenis..." aria-label="Buscar">
+        <button type="submit">Buscar</button>
+      </form>
+      <nav>
+        <a href="{% url 'catalogo' %}">Catálogo</a>
+        <a href="{% url 'carrito' %}">Carrito <span class="badge">{{ carrito_cantidad }}</span></a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'mis_pedidos' %}">Mis pedidos</a>
+          <a href="{% url 'rastreo' %}">Rastreo</a>
+          <a href="{% url 'chat' %}">Chat</a>
+          {% if user.is_staff %}<a href="{% url 'panel' %}">Panel</a>{% endif %}
+          <form method="post" action="{% url 'logout' %}" style="display:inline">{% csrf_token %}
+            <button type="submit" class="enlace">Salir ({{ user.username }})</button>
+          </form>
+        {% else %}
+          <a href="{% url 'login' %}" data-libre>Entrar</a>
+          <a href="{% url 'registro' %}" data-libre>Crear cuenta</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  {% if encuesta_pendiente and request.resolver_match.url_name != 'encuesta' %}
+    <div class="aviso-encuesta">
+      <div class="contenedor">
+        &#9733; Tu pedido #{{ encuesta_pendiente.pk }} ya fue entregado.
+        <a href="{% url 'encuesta' encuesta_pendiente.pk %}">Cuéntanos qué tal estuvo (5 preguntas rápidas)</a>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if messages %}
+    <ul class="mensajes">
+      {% for m in messages %}<li class="{{ m.tags }}">{{ m }}</li>{% endfor %}
+    </ul>
+  {% endif %}
+
+  <main class="contenedor" {% block main_attrs %}{% endblock %}>
+    {% block contenido %}{% endblock %}
+    {% if request.resolver_match.url_name != 'inicio' %}
+      <div class="volver-wrap">
+        <a class="btn btn-oscuro volver" href="{% url 'inicio' %}" data-libre>&#8592; Volver al menú principal</a>
+      </div>
+    {% endif %}
+  </main>
+
+  <footer>
+    <div class="eslogan">“Viste la pasión, juega con elegancia”</div>
+    <small>© Golden Luxury · Artículos de fútbol</small>
+  </footer>
+
+  <div id="cookies" data-libre>
+    <span>Usamos cookies y métricas para mejorar tu experiencia. ¿Aceptas?</span>
+    <button class="btn btn-chico" data-si>Aceptar</button>
+    <button class="btn btn-chico btn-oscuro" data-no>Rechazar</button>
+  </div>
+
+  {% if not user.is_authenticated %}
+  <div class="modal-acceso" id="modal-acceso" data-libre role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+    <div class="modal-caja">
+      <img src="{% static 'img/logo.jpg' %}" alt="Golden Luxury">
+      <h2 id="modal-titulo">Únete a Golden Luxury</h2>
+      <p>Inicia sesión o crea tu cuenta para poder navegar en el sitio.</p>
+      <p>
+        <a class="btn" href="{% url 'login' %}" data-libre>Iniciar sesión</a>
+        <a class="btn btn-oscuro" href="{% url 'registro' %}" data-libre>Crear cuenta</a>
+      </p>
+      <button type="button" class="modal-cerrar" data-cerrar>Ahora no</button>
+    </div>
+  </div>
+  {% endif %}
+  <script src="{% static 'js/acceso.js' %}"></script>
+  <script src="{% static 'js/tracker.js' %}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

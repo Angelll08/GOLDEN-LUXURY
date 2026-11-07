@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block titulo %}Productos (panel){% endblock %}
+{% block contenido %}
+<section>
+  <h1 class="titulo-seccion">Productos</h1>
+  {% include 'panel/_menu.html' %}
+  <p><a class="btn" href="{% url 'panel_producto_nuevo' %}">+ Nuevo producto</a></p>
+  <div class="tabla-scroll">
+  <table>
+    <tr><th></th><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Stock por talla</th><th>Estado</th><th></th></tr>
+    {% for p in productos %}
+    <tr>
+      <td><img class="mini" src="{{ p.imagen.url }}" alt=""></td>
+      <td>{{ p.nombre }}{% if p.destacado %} ⭐{% endif %}</td>
+      <td>{{ p.categoria }}</td>
+      <td>${{ p.precio|floatformat:2 }}</td>
+      <td>{% for v in p.variantes.all %}{{ v.talla }}: {{ v.stock }}{% if not forloop.last %} · {% endif %}{% endfor %}</td>
+      <td>{% if p.activo %}Activo{% else %}Inactivo{% endif %}</td>
+      <td style="white-space:nowrap">
+        <a class="btn btn-chico" href="{% url 'panel_producto_editar' p.pk %}">Editar</a>
+        <form method="post" action="{% url 'panel_producto_borrar' p.pk %}" style="display:inline" onsubmit="return confirm('¿Eliminar este producto?')">
+          {% csrf_token %}<button class="btn btn-chico btn-peligro" type="submit">Borrar</button>
+        </form>
+      </td>
+    </tr>
+    {% empty %}<tr><td colspan="7">No hay productos todavía.</td></tr>{% endfor %}
+  </table>
+  </div>
+</section>
+{% endblock %}

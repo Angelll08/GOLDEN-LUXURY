@@ -1,0 +1,10 @@
+<a href="{% url 'detalle' p.pk %}" style="text-decoration:none">
+  <article class="tarjeta">
+    <img src="{{ p.imagen.url }}" alt="{{ p.nombre }}">
+    <div class="cuerpo">
+      <small>{{ p.categoria.nombre }}</small>
+      <h3 style="margin:4px 0 8px">{{ p.nombre }}</h3>
+      <span class="precio">${{ p.precio|floatformat:2 }}</span>
+    </div>
+  </article>
+</a>

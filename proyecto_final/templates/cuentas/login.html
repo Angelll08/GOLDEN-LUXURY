@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block titulo %}Iniciar sesión{% endblock %}
+{% block main_attrs %}data-libre{% endblock %}
+{% block contenido %}
+<div class="caja">
+  <h1>Iniciar sesión</h1>
+  {% include 'cuentas/_social.html' with titulo='Entra con:' %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn" type="submit">Entrar con usuario o correo</button>
+  </form>
+  <p>¿No tienes cuenta? <a href="{% url 'registro' %}">Regístrate</a></p>
+</div>
+{% endblock %}

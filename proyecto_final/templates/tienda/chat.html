@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}Chat{% endblock %}
+{% block contenido %}
+<section>
+  <h1 class="titulo-seccion">Chat de preguntas y respuestas</h1>
+
+  <div id="chat-caja" class="chat-caja" aria-live="polite"></div>
+
+  <form id="chat-form" class="chat-form" autocomplete="off">
+    <span class="chat-nombre">{{ nombre }}</span>
+    <input type="text" id="chat-texto" maxlength="300" placeholder="Escribe tu mensaje..." aria-label="Mensaje">
+    <button class="btn" type="submit" id="chat-enviar">Enviar</button>
+  </form>
+  <input type="hidden" id="chat-csrf" value="{{ csrf_token }}">
+  <div id="chat-datos" data-url-mensajes="{% url 'chat_mensajes' %}" data-url-enviar="{% url 'chat_enviar' %}"></div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/chat.js' %}"></script>{% endblock %}

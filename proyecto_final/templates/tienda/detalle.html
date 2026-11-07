@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ p.nombre }}{% endblock %}
+{% block contenido %}
+<section class="dos-col">
+  <div class="galeria">
+    <img id="img-principal" class="galeria-principal" src="{{ p.imagen.url }}" alt="{{ p.nombre }}">
+    {% if p.imagenes.all %}
+    <div class="miniaturas">
+      <button type="button" class="miniatura activa" data-src="{{ p.imagen.url }}"><img src="{{ p.imagen.url }}" alt="Imagen 1"></button>
+      {% for i in p.imagenes.all %}
+        <button type="button" class="miniatura" data-src="{{ i.imagen.url }}"><img src="{{ i.imagen.url }}" alt="Imagen {{ forloop.counter|add:1 }}"></button>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <div>
+    <small>{{ p.categoria.nombre }}</small>
+    <h1>{{ p.nombre }}</h1>
+    <p class="precio" style="font-size:1.6rem">${{ p.precio|floatformat:2 }}</p>
+    <p>{{ p.descripcion|linebreaksbr }}</p>
+    {% if variantes %}
+      <form method="post" action="{% url 'carrito_agregar' %}">
+        {% csrf_token %}
+        <div class="campo">
+          <label for="variante">Talla</label>
+          <select name="variante" id="variante" required>
+            {% for v in variantes %}<option value="{{ v.pk }}">{{ v.talla }} ({{ v.stock }} disponibles)</option>{% endfor %}
+          </select>
+        </div>
+        {% if p.categoria.permite_personalizacion %}
+        <div class="campo personalizar">
+          <label class="check" for="personalizar">
+            <input type="checkbox" name="personalizar" id="personalizar">
+            Personalizar con dorsal y nombre (+${{ p.categoria.costo_personalizacion|floatformat:2 }} por pieza)
+          </label>
+          <div id="datos-bordado" hidden>
+            <label for="dorsal">Dorsal (0 a 99)</label>
+            <input type="number" name="dorsal" id="dorsal" min="0" max="99" style="max-width:120px">
+            <label for="nombre_bordado">Nombre (máximo 12 letras)</label>
+            <input type="text" name="nombre_bordado" id="nombre_bordado" maxlength="12" style="max-width:260px">
+            <small>Puedes poner solo dorsal, solo nombre o ambos. Si compras varias piezas con datos distintos, agrégalas por separado.</small>
+          </div>
+        </div>
+        {% endif %}
+        <div class="campo">
+          <label for="cantidad">Cantidad</label>
+          <input type="number" id="cantidad" name="cantidad" value="1" min="1" style="max-width:100px">
+        </div>
+        <button class="btn" type="submit">Agregar al carrito</button>
+      </form>
+    {% else %}
+      <p><strong>Producto agotado.</strong></p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  const principal = document.getElementById('img-principal');
+  document.querySelectorAll('.miniatura').forEach(m => m.addEventListener('click', () => {
+    principal.src = m.dataset.src;
+    document.querySelectorAll('.miniatura').forEach(x => x.classList.remove('activa'));
+    m.classList.add('activa');
+  }));
+  const chk = document.getElementById('personalizar');
+  if (chk) chk.addEventListener('change', () => {
+    document.getElementById('datos-bordado').hidden = !chk.checked;
+  });
+</script>
+{% endblock %}

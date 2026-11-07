@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block titulo %}Ubicaciones (panel){% endblock %}
+{% block head %}<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">{% endblock %}
+{% block contenido %}
+<section>
+  <h1 class="titulo-seccion">Ubicaciones de pedidos</h1>
+  {% include 'panel/_menu.html' %}
+  <div id="mapa-admin"></div>
+  {{ puntos|json_script:"d-puntos" }}
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const puntos = JSON.parse(document.getElementById('d-puntos').textContent);
+  const mapa = L.map('mapa-admin').setView([23.6345, -102.5528], 5);   // México
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(mapa);
+  const grupo = L.featureGroup();
+  puntos.forEach(p => L.marker([p.lat, p.lng]).bindPopup(p.texto).addTo(grupo));
+  grupo.addTo(mapa);
+  if (puntos.length) mapa.fitBounds(grupo.getBounds().pad(0.2));
+</script>
+{% endblock %}

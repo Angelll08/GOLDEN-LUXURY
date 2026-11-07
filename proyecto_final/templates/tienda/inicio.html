@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}Inicio{% endblock %}
+{% block contenido %}
+</main>
+<div class="hero">
+  <img src="{% static 'img/logo.jpg' %}" alt="Logo Golden Luxury">
+  <h1>GOLDEN LUXURY</h1>
+  <p>“Viste la pasión, juega con elegancia”</p>
+  <a class="btn" href="{% url 'catalogo' %}">Ver catálogo</a>
+</div>
+<main class="contenedor">
+  <section>
+    <h2 class="titulo-seccion">Categorías</h2>
+    {% for c in categorias %}
+      <a class="categoria-chip" href="{% url 'catalogo' %}?categoria={{ c.slug }}">{{ c.nombre }}</a>
+    {% empty %}<p>Aún no hay categorías. Créalas desde el panel de administración.</p>{% endfor %}
+  </section>
+  <section>
+    <h2 class="titulo-seccion">Destacados</h2>
+    <div class="rejilla">
+      {% for p in destacados %}{% include 'tienda/_card.html' %}
+      {% empty %}<p>Todavía no hay productos destacados.</p>{% endfor %}
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block titulo %}{% if producto %}Editar{% else %}Nuevo{% endif %} producto{% endblock %}
+{% block contenido %}
+<section>
+  <h1 class="titulo-seccion">{% if producto %}Editar «{{ producto.nombre }}»{% else %}Nuevo producto{% endif %}</h1>
+  {% include 'panel/_menu.html' %}
+  <form method="post" enctype="multipart/form-data" class="caja ancha">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if producto and producto.imagenes.all %}
+      <h3>Imágenes de galería actuales</h3>
+      <p><small>Marca «Quitar» en las que quieras eliminar y guarda.</small></p>
+      <div class="galeria-admin">
+        {% for i in producto.imagenes.all %}
+          <label class="img-borrar">
+            <img src="{{ i.imagen.url }}" alt="">
+            <span><input type="checkbox" name="borrar_imagenes" value="{{ i.pk }}"> Quitar</span>
+          </label>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <h3>Tallas y stock</h3>
+    {{ formset.management_form }}
+    <table>
+      <tr><th>Talla</th><th>Stock</th><th>Eliminar</th></tr>
+      {% for f in formset %}
+      <tr>
+        <td>{{ f.id }}{{ f.talla }}{{ f.talla.errors }}</td>
+        <td>{{ f.stock }}{{ f.stock.errors }}</td>
+        <td>{% if f.instance.pk %}{{ f.DELETE }}{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <p></p>
+    <button class="btn" type="submit">Guardar</button>
+    <a class="btn btn-oscuro" href="{% url 'panel_productos' %}">Cancelar</a>
+  </form>
+</section>
+{% endblock %}

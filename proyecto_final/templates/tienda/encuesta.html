@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block titulo %}Encuesta de satisfacción{% endblock %}
+{% block contenido %}
+<section>
+  <h1 class="titulo-seccion">¿Qué tal estuvo tu pedido #{{ pedido.pk }}?</h1>
+  <form method="post" class="caja">
+    {% csrf_token %}
+    {% for campo in preguntas %}
+      <fieldset class="pregunta">
+        <legend>{{ campo.label }}</legend>
+        <div class="escala">
+          {% for radio in campo %}
+            <label class="opcion">{{ radio.tag }}<span>{{ radio.choice_label }}</span></label>
+          {% endfor %}
+        </div>
+        <small>{{ campo.help_text }}</small>
+        {{ campo.errors }}
+      </fieldset>
+    {% endfor %}
+    <div class="campo">
+      {{ form.comentario.label_tag }}
+      {{ form.comentario }}
+      {{ form.comentario.errors }}
+    </div>
+    <button class="btn" type="submit">Enviar mi opinión</button>
+  </form>
+</section>
+{% endblock %}

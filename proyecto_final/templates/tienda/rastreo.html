@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block titulo %}Rastreo de pedidos{% endblock %}
+{% block contenido %}
+<section>
+  <h1 class="titulo-seccion">Rastreo de pedidos</h1>
+  <p><small>El rastreo es una simulación: avanza cuando el administrador actualiza el estado del pedido.</small></p>
+
+  <form method="get" class="caja ancha" style="margin:0 0 20px; display:flex; gap:10px; flex-wrap:wrap; align-items:end">
+    <div style="flex:1; min-width:220px">
+      <label for="guia">Número de guía</label>
+      <input type="text" id="guia" name="guia" value="{{ guia }}" placeholder="Ej. GL00000001MX">
+    </div>
+    <button class="btn" type="submit">Buscar</button>
+  </form>
+
+  {% for p in pedidos %}
+    <div class="caja ancha" style="margin:0 0 16px">
+      <strong>Pedido #{{ p.pk }}</strong> · Guía {{ p.guia }} · <em>{{ p.get_estado_display }}</em>
+      <div class="barra" aria-label="Progreso del pedido"><div style="width: {{ p.progreso }}%"></div></div>
+      <a class="btn btn-chico" href="{% url 'rastreo_detalle' p.pk %}">Ver rastreo</a>
+    </div>
+  {% empty %}
+    <p>Aún no tienes pedidos para rastrear.</p>
+  {% endfor %}
+</section>
+{% endblock %}

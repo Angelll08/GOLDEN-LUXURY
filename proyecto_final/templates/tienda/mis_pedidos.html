@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block titulo %}Mis pedidos{% endblock %}
+{% block contenido %}
+<section>
+  <h1 class="titulo-seccion">Mis pedidos</h1>
+  {% for p in pedidos %}
+    <div class="caja ancha" style="margin:0 0 16px">
+      <strong>Pedido #{{ p.pk }}</strong> · {{ p.creado|date:"d/m/Y H:i" }} · <em>{{ p.get_estado_display }}</em> · ${{ p.total|floatformat:2 }}
+      <ul>
+        {% for i in p.items.all %}
+          <li>{{ i.variante.producto.nombre }} (talla {{ i.variante.talla }}) × {{ i.cantidad }}
+            {% if i.personalizado %}<br><small class="bordado">Bordado: {% if i.dorsal is not None %}dorsal {{ i.dorsal }}{% endif %}{% if i.dorsal is not None and i.nombre_bordado %} · {% endif %}{% if i.nombre_bordado %}nombre «{{ i.nombre_bordado }}»{% endif %}</small>{% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+      <small>Envío a: {{ p.direccion }}</small>
+      {% if p.referencia_pago %}<br><small>Pago: {{ p.tarjeta_marca }} terminada en {{ p.tarjeta_ultimos4 }} · Ref. {{ p.referencia_pago }} (simulado)</small>{% endif %}
+      <p style="margin:12px 0 0">
+        <a class="btn btn-chico btn-oscuro" href="{% url 'rastreo_detalle' p.pk %}">Rastrear pedido</a>
+        {% if p.estado == 'entregado' and not p.calificado %}
+          <a class="btn btn-chico" href="{% url 'encuesta' p.pk %}">Calificar pedido</a>
+        {% elif p.calificado %}
+          <small>&#9733; Ya calificaste este pedido</small>
+        {% endif %}
+      </p>
+
+      <details class="pedido-fotos">
+        <summary aria-label="Ver los productos de este pedido"><span class="flecha">&#9660;</span></summary>
+        <div class="pedido-fotos-lista">
+          {% for i in p.items.all %}
+            <figure class="pedido-foto">
+              <img src="{{ i.variante.producto.imagen.url }}" alt="{{ i.variante.producto.nombre }}">
+              <figcaption>{{ i.variante.producto.nombre }}<br><small>Talla {{ i.variante.talla }} · × {{ i.cantidad }}</small></figcaption>
+            </figure>
+          {% endfor %}
+        </div>
+      </details>
+    </div>
+  {% empty %}
+    <p>Aún no tienes pedidos.</p>
+  {% endfor %}
+</section>
+{% endblock %}

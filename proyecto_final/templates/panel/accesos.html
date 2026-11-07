@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block titulo %}Accesos (panel){% endblock %}
+{% block contenido %}
+<section>
+  <h1 class="titulo-seccion">Accesos recientes</h1>
+  {% include 'panel/_menu.html' %}
+  <div class="tabla-scroll">
+  <table>
+    <tr><th>Usuario</th><th>IP</th><th>Navegador</th><th>Fecha</th></tr>
+    {% for a in accesos %}
+    <tr><td>{{ a.usuario.username|default:"—" }}</td><td>{{ a.ip }}</td><td>{{ a.navegador }}</td><td>{{ a.fecha|date:"d/m/Y H:i" }}</td></tr>
+    {% empty %}<tr><td colspan="4">Sin accesos registrados.</td></tr>{% endfor %}
+  </table>
+  </div>
+</section>
+{% endblock %}

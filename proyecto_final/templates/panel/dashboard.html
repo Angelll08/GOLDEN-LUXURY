@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block titulo %}Panel{% endblock %}
+{% block contenido %}
+<section>
+  <h1 class="titulo-seccion">Panel de administración</h1>
+  {% include 'panel/_menu.html' %}
+  <div class="kpis">
+    <div class="kpi"><b>${{ total_ventas|floatformat:2 }}</b>Ventas totales</div>
+    <div class="kpi"><b>{{ n_pedidos }}</b>Pedidos</div>
+    <div class="kpi"><b>{{ n_usuarios }}</b>Usuarios</div>
+    <div class="kpi"><b>{{ n_productos }}</b>Productos</div>
+  </div>
+  <div class="dos-col">
+    <div><h3>Páginas más visitadas</h3><canvas id="g-paginas"></canvas></div>
+    <div><h3>Ventas por categoría</h3><canvas id="g-ventas"></canvas></div>
+  </div>
+  <h3>Tiempo promedio por página (segundos)</h3>
+  <table>
+    <tr><th>Página</th><th>Promedio</th></tr>
+    {% for t in tiempo %}<tr><td>{{ t.pagina }}</td><td>{{ t.prom|floatformat:1 }}</td></tr>
+    {% empty %}<tr><td colspan="2">Sin datos todavía (se registran cuando el visitante acepta cookies).</td></tr>{% endfor %}
+  </table>
+  <h3>Encuestas de satisfacción ({{ enc.n }} respondidas)</h3>
+  {% if enc.n %}
+  <table>
+    <tr><th>Pregunta</th><th>Promedio (1 a 5)</th></tr>
+    <tr><td>Calidad del producto</td><td>{{ enc.calidad|floatformat:1 }}</td></tr>
+    <tr><td>Coincidió con la página</td><td>{{ enc.coincidencia|floatformat:1 }}</td></tr>
+    <tr><td>Tiempo y estado de entrega</td><td>{{ enc.entrega|floatformat:1 }}</td></tr>
+    <tr><td>Experiencia de compra</td><td>{{ enc.experiencia|floatformat:1 }}</td></tr>
+    <tr><td>Recomendaría la tienda</td><td>{{ enc.recomendacion|floatformat:1 }}</td></tr>
+  </table>
+  {% if comentarios %}
+    <h4>Últimos comentarios</h4>
+    <ul>{% for c in comentarios %}<li>«{{ c.comentario }}» — {{ c.pedido.usuario.username }} (pedido #{{ c.pedido.pk }})</li>{% endfor %}</ul>
+  {% endif %}
+  {% else %}<p>Aún no hay encuestas respondidas.</p>{% endif %}
+
+  {{ grafica_paginas|json_script:"d-paginas" }}
+  {{ grafica_ventas|json_script:"d-ventas" }}
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+  const dorado = '#D4AF37', negro = '#111111';
+  const dp = JSON.parse(document.getElementById('d-paginas').textContent);
+  const dv = JSON.parse(document.getElementById('d-ventas').textContent);
+  new Chart(document.getElementById('g-paginas'), {
+    type: 'bar', data: { labels: dp.labels, datasets: [{ label: 'Vistas', data: dp.data, backgroundColor: dorado, borderColor: negro, borderWidth: 1 }] },
+    options: { plugins: { legend: { display: false } } }
+  });
+  new Chart(document.getElementById('g-ventas'), {
+    type: 'doughnut', data: { labels: dv.labels, datasets: [{ data: dv.data, backgroundColor: [dorado, negro, '#F3E5AB', '#2C2C2C', '#8c7424', '#bbb'] }] }
+  });
+</script>
+{% endblock %}

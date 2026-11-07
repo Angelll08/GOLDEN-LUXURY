@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}Finalizar compra{% endblock %}
+{% block head %}<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">{% endblock %}
+{% block contenido %}
+<section>
+  <h1 class="titulo-seccion">Finalizar compra</h1>
+  <form method="post" id="form-pago" novalidate>
+    {% csrf_token %}
+    {{ form.latitud }}{{ form.longitud }}
+    <div class="dos-col">
+      <div>
+        <h2>Resumen</h2>
+        <table>
+          {% for i in items %}
+          <tr>
+            <td>{{ i.variante.producto.nombre }} (talla {{ i.variante.talla }}) × {{ i.cantidad }}
+              {% if i.personalizado %}<br><small class="bordado">Bordado: {% if i.dorsal %}dorsal {{ i.dorsal }}{% endif %}{% if i.dorsal and i.nombre %} · {% endif %}{% if i.nombre %}nombre «{{ i.nombre }}»{% endif %} (+${{ i.extra|floatformat:2 }} por pieza)</small>{% endif %}
+            </td>
+            <td>${{ i.subtotal|floatformat:2 }}</td>
+          </tr>
+          {% endfor %}
+          <tr><td><strong>Total a pagar</strong></td><td><strong>${{ total|floatformat:2 }}</strong></td></tr>
+        </table>
+
+        <h2 style="margin-top:28px">Envío</h2>
+        <div class="campo">
+          {{ form.direccion.label_tag }}{{ form.direccion }}{{ form.direccion.errors }}
+        </div>
+        <p><small>Marca tu ubicación en el mapa (opcional) o usa tu ubicación actual.</small></p>
+        <div id="mapa"></div>
+        <button type="button" class="btn btn-oscuro btn-chico" id="mi-ubicacion">Usar mi ubicación</button>
+      </div>
+
+      <div>
+        <h2>Pago con tarjeta</h2>
+        <div class="tarjeta-visual" id="tarjeta-visual" aria-hidden="true">
+          <div class="tv-fila"><span class="tv-chip"></span><span class="tv-marca" id="tv-marca">TARJETA</span></div>
+          <div class="tv-numero" id="tv-numero">•••• •••• •••• ••••</div>
+          <div class="tv-fila">
+            <div><small>TITULAR</small><div id="tv-titular">NOMBRE DEL TITULAR</div></div>
+            <div><small>VENCE</small><div id="tv-vence">MM/AA</div></div>
+          </div>
+        </div>
+
+        <div class="campo">{{ form.titular.label_tag }}{{ form.titular }}{{ form.titular.errors }}</div>
+        <div class="campo">{{ form.numero_tarjeta.label_tag }}{{ form.numero_tarjeta }}{{ form.numero_tarjeta.errors }}</div>
+        <div class="fila-2">
+          <div class="campo">{{ form.vencimiento.label_tag }}{{ form.vencimiento }}{{ form.vencimiento.errors }}</div>
+          <div class="campo">{{ form.cvv.label_tag }}{{ form.cvv }}{{ form.cvv.errors }}</div>
+        </div>
+        <p class="aviso-pago"><strong>Pago simulado.</strong> No se realiza ningún cobro y no se guarda el número completo de tu tarjeta ni el CVV (solo la marca y los últimos 4 dígitos). Puedes escribir números al azar, por ejemplo <code>4242 4242 4242 4242</code>, vencimiento <code>12/30</code> y CVV <code>123</code>.</p>
+        <button class="btn btn-pagar" type="submit" id="btn-pagar">Pagar ${{ total|floatformat:2 }} y confirmar pedido</button>
+      </div>
+    </div>
+  </form>
+</section>
+
+<div class="overlay-pago" id="overlay-pago" hidden role="alert" aria-live="assertive">
+  <div class="overlay-caja">
+    <div class="spinner"></div>
+    <p><strong>Procesando tu pago…</strong></p>
+    <p><small>No cierres ni recargues la página.</small></p>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const mapa = L.map('mapa').setView([19.6925, -99.2161], 12);   // Cuautitlán Izcalli; se puede cambiar
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(mapa);
+  let marcador = null;
+  function poner(lat, lng) {
+    if (marcador) marcador.setLatLng([lat, lng]); else marcador = L.marker([lat, lng]).addTo(mapa);
+    document.getElementById('id_latitud').value = lat.toFixed(6);
+    document.getElementById('id_longitud').value = lng.toFixed(6);
+  }
+  mapa.on('click', e => poner(e.latlng.lat, e.latlng.lng));
+  document.getElementById('mi-ubicacion').addEventListener('click', () => {
+    if (!navigator.geolocation) return alert('Tu navegador no permite geolocalización.');
+    navigator.geolocation.getCurrentPosition(
+      pos => { poner(pos.coords.latitude, pos.coords.longitude); mapa.setView([pos.coords.latitude, pos.coords.longitude], 15); },
+      () => alert('No se pudo obtener tu ubicación.')
+    );
+  });
+</script>
+<script src="{% static 'js/pago.js' %}"></script>
+{% endblock %}

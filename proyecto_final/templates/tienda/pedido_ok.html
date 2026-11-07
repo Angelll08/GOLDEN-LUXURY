@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block titulo %}Pago aprobado{% endblock %}
+{% block contenido %}
+<div class="caja" style="text-align:center">
+  <div class="sello-ok">&#10003;</div>
+  <h1>¡Pago aprobado!</h1>
+  <p>Gracias por tu compra. Tu pedido <strong>#{{ pedido.pk }}</strong> por <strong>${{ pedido.total|floatformat:2 }}</strong> quedó registrado.</p>
+  {% if pedido.referencia_pago %}
+    <p style="margin:6px 0"><small>Pagado con {{ pedido.tarjeta_marca }} terminada en <strong>{{ pedido.tarjeta_ultimos4 }}</strong><br>
+    Referencia de pago: <strong>{{ pedido.referencia_pago }}</strong><br>
+    Guía de rastreo: <strong>{{ pedido.guia }}</strong></small></p>
+    <p><small>(Pago simulado: no se hizo ningún cobro real.)</small></p>
+  {% endif %}
+  <a class="btn" href="{% url 'mis_pedidos' %}">Ver mis pedidos</a>
+  <a class="btn btn-oscuro" href="{% url 'rastreo_detalle' pedido.pk %}">Rastrear pedido</a>
+</div>
+{% endblock %}

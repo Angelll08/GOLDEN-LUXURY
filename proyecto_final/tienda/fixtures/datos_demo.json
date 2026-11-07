@@ -1,0 +1,988 @@
+[
+{
+  "model": "tienda.categoria",
+  "pk": 1,
+  "fields": {
+    "nombre": "JERSEYS",
+    "slug": "jerseys",
+    "permite_personalizacion": true,
+    "costo_personalizacion": "150.00"
+  }
+},
+{
+  "model": "tienda.categoria",
+  "pk": 2,
+  "fields": {
+    "nombre": "TENIS",
+    "slug": "tenis",
+    "permite_personalizacion": false,
+    "costo_personalizacion": "150.00"
+  }
+},
+{
+  "model": "tienda.categoria",
+  "pk": 3,
+  "fields": {
+    "nombre": "ACCESORIOS",
+    "slug": "accesorios",
+    "permite_personalizacion": false,
+    "costo_personalizacion": "150.00"
+  }
+},
+{
+  "model": "tienda.categoria",
+  "pk": 4,
+  "fields": {
+    "nombre": "ROPA",
+    "slug": "ropa",
+    "permite_personalizacion": false,
+    "costo_personalizacion": "150.00"
+  }
+},
+{
+  "model": "tienda.producto",
+  "pk": 1,
+  "fields": {
+    "categoria": 1,
+    "nombre": "JERSEY REAL MADRID LOCAL 2026",
+    "descripcion": "",
+    "precio": "1999.00",
+    "imagen": "productos/JERSEY_REAL_MADRID_LOCAL_2026_RhScrM4.webp",
+    "destacado": true,
+    "activo": true,
+    "creado": "2026-11-05T23:42:06.187Z"
+  }
+},
+{
+  "model": "tienda.producto",
+  "pk": 2,
+  "fields": {
+    "categoria": 1,
+    "nombre": "JERSEY CLUB AMERICA LOCAL 2026",
+    "descripcion": "",
+    "precio": "1999.00",
+    "imagen": "productos/Captura_de_pantalla_2026-11-06_160740.png",
+    "destacado": false,
+    "activo": true,
+    "creado": "2026-11-06T22:10:31.331Z"
+  }
+},
+{
+  "model": "tienda.producto",
+  "pk": 3,
+  "fields": {
+    "categoria": 2,
+    "nombre": "TACOS NIKE MERCURIAL SUPERFLY 11 ELITE",
+    "descripcion": "",
+    "precio": "5599.00",
+    "imagen": "productos/ZMSUPERFLY11ELITEFGT.avif",
+    "destacado": false,
+    "activo": true,
+    "creado": "2026-11-06T22:17:34.023Z"
+  }
+},
+{
+  "model": "tienda.producto",
+  "pk": 4,
+  "fields": {
+    "categoria": 2,
+    "nombre": "TACOS NIKE TIEMPO LIGERA PRO LE",
+    "descripcion": "",
+    "precio": "3599.00",
+    "imagen": "productos/TIEMPOLIGERAPROFGLE.avif",
+    "destacado": false,
+    "activo": true,
+    "creado": "2026-11-06T22:21:10.609Z"
+  }
+},
+{
+  "model": "tienda.producto",
+  "pk": 5,
+  "fields": {
+    "categoria": 2,
+    "nombre": "TACOS NIKE PHANTOM 6 LOW CLUB",
+    "descripcion": "",
+    "precio": "1799.00",
+    "imagen": "productos/PHANTOM6LOWCLUBFG_MGT.avif",
+    "destacado": true,
+    "activo": true,
+    "creado": "2026-11-06T22:24:46.075Z"
+  }
+},
+{
+  "model": "tienda.producto",
+  "pk": 6,
+  "fields": {
+    "categoria": 3,
+    "nombre": "BALON DE FUTBOL NIKE ACADEMY",
+    "descripcion": "BALON DE FUTBOL NIKE ACADEMY COLOR BLANCO",
+    "precio": "899.00",
+    "imagen": "productos/NKACADEMYCEL-FA26.avif",
+    "destacado": true,
+    "activo": true,
+    "creado": "2026-11-06T22:35:34.260Z"
+  }
+},
+{
+  "model": "tienda.producto",
+  "pk": 7,
+  "fields": {
+    "categoria": 3,
+    "nombre": "BALON DE FUTBOL NIKE ACADEMY",
+    "descripcion": "BALON DE FUTBOL NIKE ACADEMY COLOR VERDE",
+    "precio": "899.00",
+    "imagen": "productos/NKACADEMYCEL-FA26_2.avif",
+    "destacado": true,
+    "activo": true,
+    "creado": "2026-11-06T22:36:51.220Z"
+  }
+},
+{
+  "model": "tienda.producto",
+  "pk": 8,
+  "fields": {
+    "categoria": 3,
+    "nombre": "GUANTES NIKE DYNAMIC FIT",
+    "descripcion": "GUANTES DE PORTERO DE FUTBOL NIKE DYNAMIC FIT",
+    "precio": "1599.00",
+    "imagen": "productos/NKGKDYNAMICFIT-FA25.avif",
+    "destacado": true,
+    "activo": true,
+    "creado": "2026-11-06T22:39:11.677Z"
+  }
+},
+{
+  "model": "tienda.producto",
+  "pk": 9,
+  "fields": {
+    "categoria": 3,
+    "nombre": "ESPINILLERAS NIKE MERCURIAL LITE",
+    "descripcion": "ESPINILLERAS DE FUTBOL NIKE MERCURIAL LITE",
+    "precio": "699.00",
+    "imagen": "productos/NKMERCLITE-FA22.avif",
+    "destacado": true,
+    "activo": true,
+    "creado": "2026-11-06T22:41:32.916Z"
+  }
+},
+{
+  "model": "tienda.producto",
+  "pk": 10,
+  "fields": {
+    "categoria": 4,
+    "nombre": "CHAMARRA ALTERNATIVA CLUB DE FUTBOL GUADALAJARA",
+    "descripcion": "CHAMARRA ANTHEM DE FUTBOL NIKE PARA HOMBRE DEL CLUB DE FUTBOL GUADALAJARA",
+    "precio": "2599.00",
+    "imagen": "productos/CDGMNKANTHEMJKTKMC3R.avif",
+    "destacado": false,
+    "activo": true,
+    "creado": "2026-11-06T22:45:44.582Z"
+  }
+},
+{
+  "model": "tienda.producto",
+  "pk": 11,
+  "fields": {
+    "categoria": 4,
+    "nombre": "PANTS DE FUTBOL NIKE ACADEMY",
+    "descripcion": "PANTS DE FUTBOL DRI-FIT PARA MUJER NIKE ACADEMY",
+    "precio": "1199.00",
+    "imagen": "productos/WNKDFACD25PANTKPZBR.avif",
+    "destacado": true,
+    "activo": true,
+    "creado": "2026-11-06T22:49:38.857Z"
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 1,
+  "fields": {
+    "producto": 1,
+    "imagen": "productos/galeria/27-home-replica-jersey_ss5_p-204332239u-kkcra7yom57rfnsem6ptv-hooccmv_ZacLPex.webp",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 2,
+  "fields": {
+    "producto": 2,
+    "imagen": "productos/galeria/am2.webp",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 3,
+  "fields": {
+    "producto": 3,
+    "imagen": "productos/galeria/ZMSUPERFLY11ELITEFGT_1.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 4,
+  "fields": {
+    "producto": 3,
+    "imagen": "productos/galeria/ZMSUPERFLY11ELITEFGT_2.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 5,
+  "fields": {
+    "producto": 3,
+    "imagen": "productos/galeria/ZMSUPERFLY11ELITEFGT_3.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 6,
+  "fields": {
+    "producto": 3,
+    "imagen": "productos/galeria/ZMSUPERFLY11ELITEFGT_4.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 7,
+  "fields": {
+    "producto": 3,
+    "imagen": "productos/galeria/ZMSUPERFLY11ELITEFGT_5.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 8,
+  "fields": {
+    "producto": 3,
+    "imagen": "productos/galeria/ZMSUPERFLY11ELITEFGT_6.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 9,
+  "fields": {
+    "producto": 4,
+    "imagen": "productos/galeria/TIEMPOLIGERAPROFGLE_1.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 10,
+  "fields": {
+    "producto": 4,
+    "imagen": "productos/galeria/TIEMPOLIGERAPROFGLE_2.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 11,
+  "fields": {
+    "producto": 4,
+    "imagen": "productos/galeria/TIEMPOLIGERAPROFGLE_3.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 12,
+  "fields": {
+    "producto": 4,
+    "imagen": "productos/galeria/TIEMPOLIGERAPROFGLE_4.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 13,
+  "fields": {
+    "producto": 4,
+    "imagen": "productos/galeria/TIEMPOLIGERAPROFGLE_5.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 14,
+  "fields": {
+    "producto": 4,
+    "imagen": "productos/galeria/TIEMPOLIGERAPROFGLE_6.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 15,
+  "fields": {
+    "producto": 4,
+    "imagen": "productos/galeria/TIEMPOLIGERAPROFGLE_7.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 16,
+  "fields": {
+    "producto": 5,
+    "imagen": "productos/galeria/PHANTOM6LOWCLUBFG_MGT_1.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 17,
+  "fields": {
+    "producto": 5,
+    "imagen": "productos/galeria/PHANTOM6LOWCLUBFG_MGT_2.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 18,
+  "fields": {
+    "producto": 5,
+    "imagen": "productos/galeria/PHANTOM6LOWCLUBFG_MGT_3.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 19,
+  "fields": {
+    "producto": 5,
+    "imagen": "productos/galeria/PHANTOM6LOWCLUBFG_MGT_4.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 20,
+  "fields": {
+    "producto": 5,
+    "imagen": "productos/galeria/PHANTOM6LOWCLUBFG_MGT_5.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 21,
+  "fields": {
+    "producto": 5,
+    "imagen": "productos/galeria/PHANTOM6LOWCLUBFG_MGT_6.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 22,
+  "fields": {
+    "producto": 5,
+    "imagen": "productos/galeria/PHANTOM6LOWCLUBFG_MGT_7.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 23,
+  "fields": {
+    "producto": 6,
+    "imagen": "productos/galeria/NKACADEMYCEL-FA26_1.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 24,
+  "fields": {
+    "producto": 7,
+    "imagen": "productos/galeria/NKACADEMYCEL-FA26_3.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 25,
+  "fields": {
+    "producto": 8,
+    "imagen": "productos/galeria/NKGKDYNAMICFIT-FA25_1.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 26,
+  "fields": {
+    "producto": 10,
+    "imagen": "productos/galeria/CDGMNKANTHEMJKTKMC3R_1.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 27,
+  "fields": {
+    "producto": 10,
+    "imagen": "productos/galeria/CDGMNKANTHEMJKTKMC3R_2.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 28,
+  "fields": {
+    "producto": 10,
+    "imagen": "productos/galeria/CDGMNKANTHEMJKTKMC3R_3.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 29,
+  "fields": {
+    "producto": 10,
+    "imagen": "productos/galeria/CDGMNKANTHEMJKTKMC3R_4.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 30,
+  "fields": {
+    "producto": 11,
+    "imagen": "productos/galeria/WNKDFACD25PANTKPZBR_1.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 31,
+  "fields": {
+    "producto": 11,
+    "imagen": "productos/galeria/WNKDFACD25PANTKPZBR_2.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 32,
+  "fields": {
+    "producto": 11,
+    "imagen": "productos/galeria/WNKDFACD25PANTKPZBR_3.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 33,
+  "fields": {
+    "producto": 11,
+    "imagen": "productos/galeria/WNKDFACD25PANTKPZBR_4.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.imagenproducto",
+  "pk": 34,
+  "fields": {
+    "producto": 11,
+    "imagen": "productos/galeria/WNKDFACD25PANTKPZBR_5.avif",
+    "orden": 0
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 1,
+  "fields": {
+    "producto": 1,
+    "talla": "S",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 2,
+  "fields": {
+    "producto": 1,
+    "talla": "M",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 3,
+  "fields": {
+    "producto": 1,
+    "talla": "L",
+    "stock": 8
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 4,
+  "fields": {
+    "producto": 2,
+    "talla": "S",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 5,
+  "fields": {
+    "producto": 2,
+    "talla": "M",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 6,
+  "fields": {
+    "producto": 2,
+    "talla": "L",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 7,
+  "fields": {
+    "producto": 3,
+    "talla": "24",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 8,
+  "fields": {
+    "producto": 3,
+    "talla": "25",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 9,
+  "fields": {
+    "producto": 3,
+    "talla": "26",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 10,
+  "fields": {
+    "producto": 3,
+    "talla": "27",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 11,
+  "fields": {
+    "producto": 3,
+    "talla": "28",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 12,
+  "fields": {
+    "producto": 3,
+    "talla": "29",
+    "stock": 5
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 13,
+  "fields": {
+    "producto": 3,
+    "talla": "30",
+    "stock": 5
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 14,
+  "fields": {
+    "producto": 4,
+    "talla": "24",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 15,
+  "fields": {
+    "producto": 4,
+    "talla": "25",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 16,
+  "fields": {
+    "producto": 4,
+    "talla": "26",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 17,
+  "fields": {
+    "producto": 4,
+    "talla": "27",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 18,
+  "fields": {
+    "producto": 4,
+    "talla": "28",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 19,
+  "fields": {
+    "producto": 4,
+    "talla": "29",
+    "stock": 5
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 20,
+  "fields": {
+    "producto": 4,
+    "talla": "30",
+    "stock": 5
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 21,
+  "fields": {
+    "producto": 5,
+    "talla": "24",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 22,
+  "fields": {
+    "producto": 5,
+    "talla": "25",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 23,
+  "fields": {
+    "producto": 5,
+    "talla": "26",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 24,
+  "fields": {
+    "producto": 5,
+    "talla": "27",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 25,
+  "fields": {
+    "producto": 5,
+    "talla": "28",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 26,
+  "fields": {
+    "producto": 5,
+    "talla": "29",
+    "stock": 5
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 27,
+  "fields": {
+    "producto": 5,
+    "talla": "30",
+    "stock": 5
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 28,
+  "fields": {
+    "producto": 6,
+    "talla": "3",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 29,
+  "fields": {
+    "producto": 6,
+    "talla": "4",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 30,
+  "fields": {
+    "producto": 6,
+    "talla": "5",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 31,
+  "fields": {
+    "producto": 7,
+    "talla": "3",
+    "stock": 0
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 32,
+  "fields": {
+    "producto": 7,
+    "talla": "4",
+    "stock": 0
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 33,
+  "fields": {
+    "producto": 7,
+    "talla": "5",
+    "stock": 0
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 34,
+  "fields": {
+    "producto": 8,
+    "talla": "6",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 35,
+  "fields": {
+    "producto": 8,
+    "talla": "7",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 36,
+  "fields": {
+    "producto": 8,
+    "talla": "8",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 37,
+  "fields": {
+    "producto": 8,
+    "talla": "9",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 38,
+  "fields": {
+    "producto": 9,
+    "talla": "XS",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 39,
+  "fields": {
+    "producto": 9,
+    "talla": "S",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 40,
+  "fields": {
+    "producto": 9,
+    "talla": "M",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 41,
+  "fields": {
+    "producto": 9,
+    "talla": "L",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 42,
+  "fields": {
+    "producto": 9,
+    "talla": "XL",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 43,
+  "fields": {
+    "producto": 10,
+    "talla": "XS",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 44,
+  "fields": {
+    "producto": 10,
+    "talla": "S",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 45,
+  "fields": {
+    "producto": 10,
+    "talla": "M",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 46,
+  "fields": {
+    "producto": 10,
+    "talla": "L",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 47,
+  "fields": {
+    "producto": 10,
+    "talla": "XL",
+    "stock": 4
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 48,
+  "fields": {
+    "producto": 10,
+    "talla": "XXL",
+    "stock": 5
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 49,
+  "fields": {
+    "producto": 11,
+    "talla": "XS",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 50,
+  "fields": {
+    "producto": 11,
+    "talla": "S",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 51,
+  "fields": {
+    "producto": 11,
+    "talla": "M",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 52,
+  "fields": {
+    "producto": 11,
+    "talla": "L",
+    "stock": 10
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 53,
+  "fields": {
+    "producto": 11,
+    "talla": "XL",
+    "stock": 5
+  }
+},
+{
+  "model": "tienda.variante",
+  "pk": 54,
+  "fields": {
+    "producto": 11,
+    "talla": "XXL",
+    "stock": 5
+  }
+}
+]

@@ -1,0 +1,21 @@
+{% load socialaccount %}
+<div class="social">
+  <p class="social-titulo">{{ titulo }}</p>
+  <div class="social-botones">
+    {% if google_listo %}
+      <form method="post" action="{% provider_login_url 'google' %}">{% csrf_token %}
+        <button type="submit" class="btn-social"><span class="ico">G</span> Google</button>
+      </form>
+    {% else %}
+      <form><button type="button" class="btn-social" disabled title="Falta configurar las credenciales de Google en settings.py"><span class="ico">G</span> Google</button></form>
+    {% endif %}
+    {% if facebook_listo %}
+      <form method="post" action="{% provider_login_url 'facebook' %}">{% csrf_token %}
+        <button type="submit" class="btn-social"><span class="ico">f</span> Facebook</button>
+      </form>
+    {% else %}
+      <form><button type="button" class="btn-social" disabled title="Falta configurar las credenciales de Facebook en settings.py"><span class="ico">f</span> Facebook</button></form>
+    {% endif %}
+  </div>
+  <div class="separador"><span>o con tu correo</span></div>
+</div>

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block titulo %}Rastreo del pedido #{{ pedido.pk }}{% endblock %}
+{% block contenido %}
+<section>
+  <h1 class="titulo-seccion">Rastreo del pedido #{{ pedido.pk }}</h1>
+  <div class="caja ancha" style="margin:0 0 20px">
+    <p style="margin:0"><strong>Guía:</strong> {{ pedido.guia }} · <strong>Paquetería:</strong> Golden Express (simulada)</p>
+    <p style="margin:6px 0 0">
+      {% if pedido.estado == 'entregado' %}<strong>Estado:</strong> Entregado
+      {% else %}<strong>Entrega estimada:</strong> {{ pedido.entrega_estimada|date:"d/m/Y" }}{% endif %}
+      · <strong>Envío a:</strong> {{ pedido.direccion }}
+    </p>
+    {% if pedido.referencia_pago %}<p style="margin:6px 0 0"><strong>Pago:</strong> {{ pedido.tarjeta_marca }} terminada en {{ pedido.tarjeta_ultimos4 }} · Ref. {{ pedido.referencia_pago }} (simulado)</p>{% endif %}
+    <div class="barra"><div style="width: {{ pedido.progreso }}%"></div></div>
+  </div>
+
+  <ol class="linea-tiempo">
+    {% for s in pasos %}
+      <li class="paso {% if s.hecho %}hecho{% endif %} {% if s.actual %}actual{% endif %}">
+        <span class="punto">{% if s.hecho %}&#10003;{% endif %}</span>
+        <div>
+          <strong>{{ s.titulo }}</strong>
+          {% if s.fecha and s.hecho %}<small> · {{ s.fecha|date:"d/m/Y H:i" }}</small>{% endif %}
+          <p>{{ s.descripcion }}</p>
+        </div>
+      </li>
+    {% endfor %}
+  </ol>
+
+  <p style="margin-top:20px">
+    <a class="btn btn-oscuro" href="{% url 'rastreo' %}">Mis rastreos</a>
+    {% if pedido.estado == 'entregado' and not pedido.calificado %}
+      <a class="btn" href="{% url 'encuesta' pedido.pk %}">Calificar pedido</a>
+    {% endif %}
+  </p>
+</section>
+{% endblock %}

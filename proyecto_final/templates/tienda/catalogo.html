@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block titulo %}Catálogo{% endblock %}
+{% block contenido %}
+<section>
+  <h1 class="titulo-seccion">Catálogo</h1>
+  <p>
+    <a class="categoria-chip {% if not cat %}activa{% endif %}" href="{% url 'catalogo' %}">Todo</a>
+    {% for c in categorias %}
+      <a class="categoria-chip {% if cat == c.slug %}activa{% endif %}" href="?categoria={{ c.slug }}{% if q %}&q={{ q }}{% endif %}">{{ c.nombre }}</a>
+    {% endfor %}
+  </p>
+  <form method="get" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px">
+    <input type="hidden" name="categoria" value="{{ cat }}">
+    <input type="text" name="q" value="{{ q }}" placeholder="Buscar..." style="max-width:260px">
+    <select name="orden" style="max-width:220px">
+      <option value="">Más nuevos</option>
+      <option value="precio" {% if orden == 'precio' %}selected{% endif %}>Precio: menor a mayor</option>
+      <option value="-precio" {% if orden == '-precio' %}selected{% endif %}>Precio: mayor a menor</option>
+    </select>
+    <button class="btn" type="submit">Filtrar</button>
+  </form>
+  <div class="rejilla">
+    {% for p in productos %}{% include 'tienda/_card.html' %}
+    {% empty %}<p>No encontramos productos con esos filtros.</p>{% endfor %}
+  </div>
+</section>
+{% endblock %}
