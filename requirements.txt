@@ -8,3 +8,4 @@ psycopg[binary]>=3.2
 python-dotenv>=1.0
 # MySQL (AppServ) solo para trabajar en Windows; Render usa PostgreSQL y no lo necesita
 mysqlclient>=2.2; sys_platform == "win32"
+PyMySQL==1.1.1
