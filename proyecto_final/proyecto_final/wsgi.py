@@ -1,9 +1,6 @@
 import os
 import sys
 
-import pymysql
-pymysql.install_as_MySQLdb()
-
 from django.core.wsgi import get_wsgi_application
 
 # Obtiene la ruta base del proyecto para que Python encuentre tus apps (cuentas, analitica, etc.)
